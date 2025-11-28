@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial, sans-serif; font-size: 12px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 6px; text-align: left; }
+  </style>
+</head>
+<body>
+  <h2>Relatório - {{ mes }}/{{ ano }}</h2>
+  <p>Usuário: {{ usuario.username }}</p>
+  <p>Total Receitas: R$ {{ total_receitas }} - Total Despesas: R$ {{ total_despesas }} - Saldo: R$ {{ saldo }}</p>
+  <table>
+    <thead><tr><th>Data</th><th>Descrição</th><th>Tipo</th><th>Categoria</th><th>Valor</th></tr></thead>
+    <tbody>
+      {% for t in transacoes %}
+        <tr>
+          <td>{{ t.data }}</td>
+          <td>{{ t.descricao }}</td>
+          <td>{{ t.get_tipo_display }}</td>
+          <td>{{ t.categoria }}</td>
+          <td>{{ t.valor }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{% extends 'financas/base.html' %}
+{% block content %}
+<h1>Dashboard</h1>
+<p>
+  <a class="btn btn-primary" href="{% url 'financas:lista_transacoes' %}">Ver transações</a>
+  <a class="btn btn-secondary" href="{% url 'financas:relatorio_mensal' %}">Relatório</a>
+</p>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card p-3">
+      <h5>Total Receitas (mês atual)</h5>
+      <p>R$ {{ total_receitas }}</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card p-3">
+      <h5>Total Despesas (mês atual)</h5>
+      <p>R$ {{ total_despesas }}</p>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card p-3">
+      <h5>Saldo (mês atual)</h5>
+      <p><strong>R$ {{ saldo }}</strong></p>
+    </div>
+  </div>
+</div>
+
+<h3 class="mt-4">Últimas transações</h3>
+<ul class="list-group">
+  {% for t in ultimas %}
+    <li class="list-group-item">{{ t.data }} - {{ t.get_tipo_display }} - {{ t.categoria }} - R$ {{ t.valor }}</li>
+  {% empty %}
+    <li class="list-group-item">Nenhuma transação.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

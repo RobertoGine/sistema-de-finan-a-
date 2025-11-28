@@ -1,0 +1,35 @@
+{% extends 'financas/base.html' %}
+{% block content %}
+<h1>Relatório Mensal - {{ mes }}/{{ ano }}</h1>
+<form method="get" class="row g-2 mb-3">
+  <div class="col-auto">
+    <input type="number" name="mes" min="1" max="12" value="{{ mes }}" class="form-control" />
+  </div>
+  <div class="col-auto">
+    <input type="number" name="ano" value="{{ ano }}" class="form-control" />
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-primary">Atualizar</button>
+    <a class="btn btn-secondary" href="{% url 'financas:relatorio_pdf' %}?mes={{ mes }}&ano={{ ano }}">Gerar PDF</a>
+  </div>
+</form>
+
+<p>Total Receitas: R$ {{ total_receitas }} | Total Despesas: R$ {{ total_despesas }} | <strong>Saldo: R$ {{ saldo }}</strong></p>
+
+<table class="table">
+  <thead><tr><th>Data</th><th>Descrição</th><th>Tipo</th><th>Categoria</th><th>Valor</th></tr></thead>
+  <tbody>
+    {% for t in transacoes %}
+      <tr>
+        <td>{{ t.data }}</td>
+        <td>{{ t.descricao }}</td>
+        <td>{{ t.get_tipo_display }}</td>
+        <td>{{ t.categoria }}</td>
+        <td>R$ {{ t.valor }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="4">Nenhuma transação nesse mês.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

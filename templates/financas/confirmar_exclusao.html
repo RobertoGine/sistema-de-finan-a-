@@ -1,0 +1,9 @@
+{% extends 'financas/base.html' %}
+{% block content %}
+<h1>Confirmar exclusão</h1>
+<p>Deseja realmente excluir a transação: <strong>{{ trans }}</strong>?</p>
+<form method="post">{% csrf_token %}
+  <button class="btn btn-danger" type="submit">Sim, excluir</button>
+  <a class="btn btn-secondary" href="{% url 'financas:lista_transacoes' %}">Cancelar</a>
+</form>
+{% endblock %}
