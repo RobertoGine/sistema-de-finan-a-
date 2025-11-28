@@ -34,4 +34,4 @@ Projeto exemplo de gerenciamento financeiro mensal com:
 
 ## Notas
 - PDF usa `xhtml2pdf` (simples de instalar). Para PDFs com CSS avançado, recomendo `WeasyPrint`.
-- Este projeto é um ponto de partida: sinta-se livre para pedir que eu adicione filtros por categoria, export CSV, gráficos ou API REST.
+
