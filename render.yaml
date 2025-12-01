@@ -1,0 +1,18 @@
+# render.yaml
+services:
+  - type: web        # serviço web
+    name: sistema-financa  # um nome amigável para o serviço
+    plan: free
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn project.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        fromEnv: SECRET_KEY
+      - key: DEBUG
+        fromEnv: DEBUG
+      - key: ALLOWED_HOSTS
+        fromEnv: ALLOWED_HOSTS
+databases:
+  - name: financa_db
+    plan: free
