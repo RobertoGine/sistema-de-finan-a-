@@ -6,6 +6,7 @@ services:
     runtime: python
     buildCommand: "./build.sh"
     startCommand: "gunicorn project.wsgi:application"
+    pythonVersion: 3.12.3
     envVars:
       - key: SECRET_KEY
         fromEnv: SECRET_KEY
