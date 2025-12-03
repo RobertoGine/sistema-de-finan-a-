@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Sum
 from django.contrib import messages
@@ -24,6 +24,21 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'financas/register.html', {'form': form})
+
+
+# def login(request):
+#     return render(request, 'financas/login.html')
+def custom_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('financas:dashboard') 
+        else:
+            messages.error(request, 'Credenciais inválidas. Por favor, tente novamente.')
+    return render(request, 'financas/login.html')
 
 
 @login_required
@@ -145,3 +160,7 @@ def gerar_pdf_relatorio(request):
     response['Content-Disposition'] = f'attachment; filename="relatorio_{ano}_{mes}.pdf"'
     return response
 
+@login_required
+def custom_logout(request):
+    logout(request)
+    return redirect('login')
