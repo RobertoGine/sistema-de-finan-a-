@@ -83,3 +83,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'financas:dashboard'
 LOGOUT_REDIRECT_URL = 'login'
+
+if os.environ.get("RENDER"):
+    import django
+    django.setup()
+    from django.core.management import call_command
+    try:
+        call_command("migrate", interactive=False)
+    except Exception as e:
+        print("Erro ao rodar migrate:", e)
+

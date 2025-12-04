@@ -1,7 +1,7 @@
 # render.yaml
 services:
-  - type: web        # serviço web
-    name: sistema-financa  # um nome amigável para o serviço
+  - type: web
+    name: sistema-financa
     plan: free
     runtime: python
     buildCommand: "./build.sh"
@@ -14,6 +14,7 @@ services:
         fromEnv: DEBUG
       - key: ALLOWED_HOSTS
         fromEnv: ALLOWED_HOSTS
+
 databases:
   - name: financa_db
     plan: free
