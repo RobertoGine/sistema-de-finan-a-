@@ -85,8 +85,8 @@ LOGIN_REDIRECT_URL = 'financas:dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 
 if os.environ.get("RENDER"):
-    #import django
-    #django.setup()
+    import django
+    django.setup()
     from django.core.management import call_command
     try:
         call_command("migrate", interactive=False)

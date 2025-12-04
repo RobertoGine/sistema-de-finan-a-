@@ -6,7 +6,7 @@ from django.db.models import Sum
 from django.contrib import messages
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from .models import Transacao, Acesso
+from .models import Transacao
 from .forms import TransacaoForm
 from io import BytesIO
 from xhtml2pdf import pisa
@@ -19,7 +19,6 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            Acesso.objects.create(usuario=user)  # registra acesso na criação
             messages.success(request, 'Conta criada com sucesso.')
             return redirect('financas:dashboard')
     else:
@@ -27,6 +26,8 @@ def register(request):
     return render(request, 'financas/register.html', {'form': form})
 
 
+# def login(request):
+#     return render(request, 'financas/login.html')
 def custom_login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -34,16 +35,16 @@ def custom_login(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            Acesso.objects.create(usuario=user)  # ✔ registra acesso
-            return redirect('financas:dashboard')
+            return redirect('financas:dashboard') 
         else:
-            messages.error(request, 'Credenciais inválidas. Por favor, tente novamente.')
+            messages.error(request, 'Credenciais inválidas. Por favor, tente novamente.')
     return render(request, 'financas/login.html')
 
 
 @login_required
 def dashboard(request):
     ultimas = Transacao.objects.filter(usuario=request.user).order_by('-data')[:5]
+    # cálculo rápido do mês atual
     hoje = date.today()
     trans_mes = Transacao.objects.filter(usuario=request.user, data__year=hoje.year, data__month=hoje.month)
     total_receitas = trans_mes.filter(tipo='R').aggregate(total=Sum('valor'))['total'] or 0
@@ -149,16 +150,15 @@ def gerar_pdf_relatorio(request):
     html = render_to_string('financas/relatorio_pdf.html', contexto)
     result = BytesIO()
 
-    # correção
-    pisa_status = pisa.CreatePDF(html, dest=result)
+    pisa_status = pisa.CreatePDF(src=html, dest=result)
 
+    # 🔥 A correção está aqui:
     if pisa_status.err:
         return HttpResponse('Erro ao gerar PDF', status=500)
 
     response = HttpResponse(result.getvalue(), content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="relatorio_{ano}_{mes}.pdf"'
     return response
-
 
 @login_required
 def custom_logout(request):
