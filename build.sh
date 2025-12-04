@@ -8,3 +8,5 @@ python manage.py migrate
 
 # coletar arquivos estáticos
 python manage.py collectstatic --noinput
+
+python create_superuser.py || true
