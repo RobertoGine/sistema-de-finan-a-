@@ -3,13 +3,13 @@ from django.contrib.auth.models import User
 from django.utils import timezone 
 
 
-
 class Acesso(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     data_hora = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.usuario.username} - {self.data_hora}"
+
 
 class Transacao(models.Model):
     TIPO_CHOICES = (
