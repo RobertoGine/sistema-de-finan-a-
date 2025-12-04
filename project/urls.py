@@ -5,6 +5,7 @@ from financas import views as financas_views
 from financas.views import custom_login, custom_logout
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
