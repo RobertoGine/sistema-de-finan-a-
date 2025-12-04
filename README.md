@@ -59,3 +59,10 @@ relatórios.
 -   A geração de PDF utiliza **xhtml2pdf**, ideal para PDFs simples.\
 -   O projeto foi estruturado como um exemplo real para quem estuda
     Django e precisa de um sistema completo e funcional.
+
+---
+
+## 🧑‍💻 Autor
+
+**Roberto Giné**  
+🎯 Projeto desenvolvido para fins de **gestão financeira pessoal**, aprendizado e portfólio.
