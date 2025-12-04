@@ -8,6 +8,7 @@ from financas.views import custom_logout, custom_login
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('financas.urls')),
     path('accounts/login/', auth_views.LoginView.as_view(template_name='financas/login.html'), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('accounts/register/', financas_views.register, name='register'),
