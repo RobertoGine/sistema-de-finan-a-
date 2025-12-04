@@ -10,7 +10,6 @@ class Acesso(models.Model):
     def __str__(self):
         return f"{self.usuario.username} - {self.data_hora}"
 
-
 class Transacao(models.Model):
     TIPO_CHOICES = (
         ('R', 'Receita'),
