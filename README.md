@@ -65,4 +65,31 @@ relatórios.
 ## 🧑‍💻 Autor
 
 **Roberto Giné**  
-🎯 Projeto desenvolvido para fins de **gestão financeira pessoal**, aprendizado e portfólio.
+🎯 Projeto desenvolvido para fins de **gestão financeira pessoal** e portfólio.
+
+---
+Licença de Uso Livre para Fins Não Comerciais
+Copyright (c) 2025 Roberto Giné
+
+É concedida permissão para qualquer pessoa usar, estudar, copiar e modificar
+este software para fins pessoais, educacionais ou de pesquisa, desde que
+sejam mantidos os avisos de copyright acima.
+
+É estritamente proibido:
+
+1. Utilizar este software ou qualquer parte dele para fins comerciais,
+   incluindo venda, prestação de serviços, licenciamento ou qualquer tipo
+   de atividade que gere lucro;
+
+2. Criar versões modificadas deste software com a intenção de venda ou
+   distribuição comercial;
+
+3. Distribuir este software sem manter esta licença e os créditos
+   originais.
+
+Qualquer uso comercial somente poderá ser realizado mediante autorização
+escrita do autor, Roberto Giné.
+
+O software é fornecido "no estado em que se encontra", sem garantias de
+qualquer tipo. O autor não se responsabiliza por danos decorrentes do uso
+deste software.
