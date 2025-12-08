@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
+#from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Sum
 from django.contrib import messages
 from django.http import HttpResponse
@@ -11,18 +11,19 @@ from .forms import TransacaoForm
 from io import BytesIO
 from xhtml2pdf import pisa
 from datetime import date
+from .forms import TransacaoForm, CustomUserCreationForm
 
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             messages.success(request, 'Conta criada com sucesso.')
             return redirect('financas:dashboard')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     return render(request, 'financas/register.html', {'form': form})
 
 

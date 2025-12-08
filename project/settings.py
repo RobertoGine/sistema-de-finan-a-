@@ -84,6 +84,16 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'financas:dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 
+# Envio de e-mail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'robertogine.dev@gmail.com'
+EMAIL_HOST_PASSWORD = 'bmowyauxbyzthbja'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
 if os.environ.get("RENDER"):
     import django
     django.setup()
