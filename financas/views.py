@@ -153,7 +153,6 @@ def gerar_pdf_relatorio(request):
 
     pisa_status = pisa.CreatePDF(src=html, dest=result)
 
-    # 🔥 A correção está aqui:
     if pisa_status.err:
         return HttpResponse('Erro ao gerar PDF', status=500)
 

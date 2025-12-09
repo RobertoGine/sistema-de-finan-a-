@@ -85,21 +85,14 @@ LOGIN_REDIRECT_URL = 'financas:dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 
 # Envio de e-mail
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND")
+
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 587))
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'robertogine.dev@gmail.com'
-EMAIL_HOST_PASSWORD = 'bmowyauxbyzthbja'
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "robertogine.dev@gmail.com")
 
-if os.environ.get("RENDER"):
-    import django
-    django.setup()
-    from django.core.management import call_command
-    try:
-        call_command("migrate", interactive=False)
-    except Exception as e:
-        print("Erro ao rodar migrate:", e)
 
