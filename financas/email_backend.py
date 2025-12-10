@@ -9,6 +9,11 @@ class BrevoEmailBackend(BaseEmailBackend):
     def send_messages(self, email_messages):
         api_key = os.environ.get("BREVO_API_KEY")
         sender_email = os.environ.get("DEFAULT_FROM_EMAIL")
+        
+        print("### BACKEND BREVO CARREGADO ###")
+        print("API KEY:", api_key[:8] + "...") if api_key else print("API KEY AUSENTE")
+        print("SENDER:", sender_email)
+
 
         if not api_key or not sender_email:
             print("Faltando BREVO_API_KEY ou DEFAULT_FROM_EMAIL")

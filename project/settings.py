@@ -85,8 +85,7 @@ LOGIN_REDIRECT_URL = 'financas:dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 
 # Backend via API Brevo
-EMAIL_BACKEND = "project.email_backend.BrevoEmailBackend" 
-
+EMAIL_BACKEND = "financas.email_backend.BrevoEmailBackend"
 
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "robertogine.dev@gmail.com")
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
