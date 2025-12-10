@@ -169,7 +169,7 @@ def custom_logout(request):
     return redirect('login')
 
 #teste envio de email
-def teste_email(request):
+'''def teste_email(request):
     try:
         send_mail(
             subject="Teste - Render + Brevo",
@@ -180,4 +180,4 @@ def teste_email(request):
         )
         return HttpResponse("E-mail enviado com sucesso!")
     except Exception as e:
-        return HttpResponse(f"Erro ao enviar: {e}")
+        return HttpResponse(f"Erro ao enviar: {e}")'''

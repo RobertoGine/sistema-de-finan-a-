@@ -90,6 +90,7 @@ EMAIL_BACKEND = "financas.email_backend.BrevoEmailBackend"
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "robertogine.dev@gmail.com")
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
 
-print("=== EMAIL_BACKEND CARREGADO ===", EMAIL_BACKEND)
+'''print("=== EMAIL_BACKEND CARREGADO ===", EMAIL_BACKEND)
 print("DEFAULT_FROM_EMAIL:", DEFAULT_FROM_EMAIL)
 print("BREVO_API_KEY:", BREVO_API_KEY[:8] + "..." if BREVO_API_KEY else "N/A")
+'''

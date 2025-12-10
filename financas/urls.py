@@ -17,5 +17,5 @@ urlpatterns = [
     path('relatorio/', views.relatorio_mensal, name='relatorio_mensal'),
     path('relatorio/pdf/', views.gerar_pdf_relatorio, name='relatorio_pdf'),
     
-    path("teste-email/", teste_email, name="teste_email"),
+    #path("teste-email/", teste_email, name="teste_email"),
 ]
