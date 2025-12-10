@@ -12,6 +12,9 @@ from io import BytesIO
 from xhtml2pdf import pisa
 from datetime import date
 from .forms import TransacaoForm, CustomUserCreationForm
+#teste envio de email
+from django.http import HttpResponse
+from django.core.mail import send_mail
 
 
 def register(request):
@@ -164,3 +167,17 @@ def gerar_pdf_relatorio(request):
 def custom_logout(request):
     logout(request)
     return redirect('login')
+
+#teste envio de email
+def teste_email(request):
+    try:
+        send_mail(
+            subject="Teste - Render + Brevo",
+            message="Se você recebeu isso, o SMTP está funcionando!",
+            from_email=None,  # usa DEFAULT_FROM_EMAIL
+            recipient_list=["robertogine.dev@gmail.com"],
+            fail_silently=False,
+        )
+        return HttpResponse("E-mail enviado com sucesso!")
+    except Exception as e:
+        return HttpResponse(f"Erro ao enviar: {e}")

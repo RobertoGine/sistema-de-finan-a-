@@ -1,6 +1,11 @@
 from django.urls import path
 from . import views
 
+#teste envio de email
+from django.urls import path
+from .views import teste_email
+
+
 app_name = 'financas'
 
 urlpatterns = [
@@ -11,4 +16,6 @@ urlpatterns = [
     path('transacoes/<int:pk>/excluir/', views.excluir_transacao, name='excluir_transacao'),
     path('relatorio/', views.relatorio_mensal, name='relatorio_mensal'),
     path('relatorio/pdf/', views.gerar_pdf_relatorio, name='relatorio_pdf'),
+    
+    path("teste-email/", teste_email, name="teste_email"),
 ]
