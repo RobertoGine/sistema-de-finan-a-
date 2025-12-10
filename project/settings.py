@@ -84,12 +84,9 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'financas:dashboard'
 LOGOUT_REDIRECT_URL = 'login'
 
-# Envio de e-mail
-EMAIL_BACKEND = "project.email_backend.BrevoEmailBackend"
-EMAIL_HOST = "smtp-relay.brevo.com"
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "9dae8d001@smtp-brevo.com"
-EMAIL_HOST_PASSWORD = "K7asUVQMRO9LyYSJ"
-DEFAULT_FROM_EMAIL = "robertogine.dev@gmail.com"
+# Backend via API Brevo
+EMAIL_BACKEND = "project.email_backend.BrevoEmailBackend" 
+
+
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "robertogine.dev@gmail.com")
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
