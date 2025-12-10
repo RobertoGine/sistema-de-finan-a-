@@ -13,8 +13,8 @@ from xhtml2pdf import pisa
 from datetime import date
 from .forms import TransacaoForm, CustomUserCreationForm
 #teste envio de email
-from django.http import HttpResponse
-from django.core.mail import send_mail
+#from django.http import HttpResponse
+#from django.core.mail import send_mail
 
 
 def register(request):

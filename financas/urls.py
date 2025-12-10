@@ -2,8 +2,8 @@ from django.urls import path
 from . import views
 
 #teste envio de email
-from django.urls import path
-from .views import teste_email
+#from django.urls import path
+#from .views import teste_email
 
 
 app_name = 'financas'
