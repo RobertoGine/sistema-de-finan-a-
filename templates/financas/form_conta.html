@@ -1,0 +1,17 @@
+{% extends 'financas/base.html' %}
+
+{% block content %}
+<h2>{% if editar %}Editar Conta{% else %}Nova Conta{% endif %}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button class="btn btn-success" type="submit">
+        {% if editar %}Salvar Alterações{% else %}Cadastrar{% endif %}
+    </button>
+
+    <a href="{% url 'financas:listar_contas' %}" class="btn btn-secondary">Voltar</a>
+</form>
+
+{% endblock %}

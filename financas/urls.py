@@ -16,6 +16,11 @@ urlpatterns = [
     path('transacoes/<int:pk>/excluir/', views.excluir_transacao, name='excluir_transacao'),
     path('relatorio/', views.relatorio_mensal, name='relatorio_mensal'),
     path('relatorio/pdf/', views.gerar_pdf_relatorio, name='relatorio_pdf'),
+    #lembrete contas a pagar
+    path("contas/", views.listar_contas, name="listar_contas"),
+    path("contas/nova/", views.cadastrar_conta, name="cadastrar_conta"),
+    path("contas/<int:pk>/editar/", views.editar_conta, name="editar_conta"),
+    path("contas/<int:pk>/excluir/", views.excluir_conta, name="excluir_conta"),
     
     #path("teste-email/", teste_email, name="teste_email"),
 ]

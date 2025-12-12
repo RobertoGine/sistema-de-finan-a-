@@ -1,0 +1,37 @@
+{% extends 'financas/base.html' %}
+
+{% block content %}
+<h2>Contas a Vencer</h2>
+
+<a href="{% url 'financas:cadastrar_conta' %}" class="btn btn-primary mb-3">+ Nova Conta</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Valor</th>
+            <th>Vencimento</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for c in contas %}
+        <tr>
+            <td>{{ c.titulo }}</td>
+            <td>R$ {{ c.valor }}</td>
+            <td>{{ c.data_vencimento }}</td>
+            <td>
+                <a href="{% url 'financas:editar_conta' c.id %}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="{% url 'financas:excluir_conta' c.id %}" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Nenhuma conta cadastrada.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

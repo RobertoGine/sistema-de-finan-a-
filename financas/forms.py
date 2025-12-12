@@ -1,17 +1,18 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Transacao
+from .models import Transacao, ContaPagar
 
 
 class TransacaoForm(forms.ModelForm):
     class Meta:
         model = Transacao
-        fields = ['tipo', 'categoria', 'descricao', 'valor', 'data']
+        fields = ['tipo', 'categoria', 'valor', 'data', 'descricao']
         widgets = {
             'data': forms.DateInput(attrs={'type': 'date'}),
         }
-        
+
+
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True, help_text="Digite um e-mail válido.")
 
@@ -30,4 +31,14 @@ class CustomUserCreationForm(UserCreationForm):
         user.email = self.cleaned_data["email"]
         if commit:
             user.save()
-        return user        
+        return user
+
+
+class ContaPagarForm(forms.ModelForm):
+    class Meta:
+        model = ContaPagar
+        fields = ["titulo", "valor", "data_vencimento", "descricao"]
+    ''' widgets = {
+            "data_vencimento": forms.DateInput(attrs={'type': 'date'}),
+        }
+'''

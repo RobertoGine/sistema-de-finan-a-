@@ -1,0 +1,14 @@
+{% extends 'financas/base.html' %}
+
+{% block content %}
+<h3>Tem certeza que deseja excluir esta conta?</h3>
+
+<p><strong>{{ conta.titulo }}</strong> — vence em {{ conta.data_vencimento }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sim, excluir</button>
+    <a href="{% url 'financas:listar_contas' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+
+{% endblock %}

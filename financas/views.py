@@ -6,12 +6,14 @@ from django.db.models import Sum
 from django.contrib import messages
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from .models import Transacao
-from .forms import TransacaoForm
+from .models import Transacao, ContaPagar
+from .forms import TransacaoForm, ContaPagarForm
 from io import BytesIO
 from xhtml2pdf import pisa
 from datetime import date
-from .forms import TransacaoForm, CustomUserCreationForm
+from .forms import CustomUserCreationForm
+from django.contrib import messages
+
 #teste envio de email
 #from django.http import HttpResponse
 #from django.core.mail import send_mail
@@ -161,7 +163,80 @@ def gerar_pdf_relatorio(request):
 
     response = HttpResponse(result.getvalue(), content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="relatorio_{ano}_{mes}.pdf"'
-    return response
+    return response 
+
+
+#criar conta a pagar
+@login_required
+def cadastrar_conta(request):
+    if request.method == "POST":
+        form = ContaPagarForm(request.POST)
+        if form.is_valid():
+            conta = form.save(commit=False)
+            conta.usuario = request.user
+            conta.save()
+            messages.success(request, "Conta cadastrada com sucesso!")
+            return redirect("financas:listar_contas")
+    else:
+        form = ContaPagarForm()
+
+    return render(request, 'financas/cadastrar_conta.html', {'form': form})
+
+#verificar
+'''@login_required
+def listar_contas(request):
+    contas = ContaPagar.objects.filter(usuario=request.user).order_by('data_vencimento')
+    return render(request, 'listar_contas.html', {'contas': contas})
+'''
+@login_required
+def listar_contas(request):
+    contas = ContaPagar.objects.filter(usuario=request.user).order_by("data_vencimento")
+    return render(request, "financas/listar_contas.html", {"contas": contas})
+
+
+@login_required
+def criar_conta(request):
+    if request.method == "POST":
+        form = ContaPagarForm(request.POST)
+        if form.is_valid():
+            conta = form.save(commit=False)
+            conta.usuario = request.user
+            conta.save()
+            messages.success(request, "Conta cadastrada com sucesso!")
+            return redirect("financas:listar_contas")
+    else:
+        form = ContaPagarForm()
+
+    return render(request, "financas/form_conta.html", {"form": form})
+
+
+@login_required
+def editar_conta(request, pk):
+    conta = get_object_or_404(ContaPagar, pk=pk, usuario=request.user)
+
+    if request.method == "POST":
+        form = ContaPagarForm(request.POST, instance=conta)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Conta atualizada com sucesso!")
+            return redirect("financas:listar_contas")
+    else:
+        form = ContaPagarForm(instance=conta)
+
+    return render(request, "financas/form_conta.html", {"form": form, "editar": True})
+
+
+@login_required
+def excluir_conta(request, pk):
+    conta = get_object_or_404(ContaPagar, pk=pk, usuario=request.user)
+
+    if request.method == "POST":
+        conta.delete()
+        messages.success(request, "Conta excluída com sucesso!")
+        return redirect("financas:listar_contas")
+
+    return render(request, "financas/confirmar_exclusao_conta.html", {"conta": conta})
+
 
 @login_required
 def custom_logout(request):
